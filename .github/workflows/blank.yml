@@ -59,13 +59,16 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            if (!context.payload.pull_request) {
+            const core = require('@actions/core');
+            const github = require('@actions/github');
+
+            if (!github.context.payload.pull_request) {
               core.setFailed('❌ Este trabajo solo debe ejecutarse en eventos de pull_request.');
             } else {
-              const approvers = await github.pulls.listReviews({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                pull_number: context.payload.pull_request.number,
+              const approvers = await github.rest.pulls.listReviews({
+                owner: github.context.repo.owner,
+                repo: github.context.repo.repo,
+                pull_number: github.context.payload.pull_request.number,
               });
 
               const validApprover = approvers.data.some(
