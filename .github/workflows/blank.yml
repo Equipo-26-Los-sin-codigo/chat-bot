@@ -36,25 +36,3 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
-  restrict-main:
-    needs: build  # Solo se ejecuta si pasa el job de build
-    runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
-    steps:
-      - name: Verificar si el aprobador es ezequielvera391
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const approvers = await github.pulls.listReviews({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: context.payload.pull_request.number,
-            });
-
-            const validApprover = approvers.data.some(
-              review => review.user.login === 'ezequielvera391' && review.state === 'APPROVED'
-            );
-
-            if (!validApprover) {
-              core.setFailed('❌ Solo @ezequielvera391 puede aprobar PRs en main.');
-            }
