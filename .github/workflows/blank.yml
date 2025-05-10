@@ -65,17 +65,19 @@ jobs:
             if (!github.context.payload.pull_request) {
               core.setFailed('❌ Este trabajo solo debe ejecutarse en eventos de pull_request.');
             } else {
-              const approvers = await github.rest.pulls.listReviews({
+              github.rest.pulls.listReviews({
                 owner: github.context.repo.owner,
                 repo: github.context.repo.repo,
                 pull_number: github.context.payload.pull_request.number,
+              }).then(approvers => {
+                const validApprover = approvers.data.some(
+                  review => review.user.login === 'ezequielvera391' && review.state === 'APPROVED'
+                );
+
+                if (!validApprover) {
+                  core.setFailed('❌ Solo @ezequielvera391 puede aprobar PRs en main.');
+                }
+              }).catch(error => {
+                core.setFailed(`❌ Error al verificar aprobadores: ${error.message}`);
               });
-
-              const validApprover = approvers.data.some(
-                review => review.user.login === 'ezequielvera391' && review.state === 'APPROVED'
-              );
-
-              if (!validApprover) {
-                core.setFailed('❌ Solo @ezequielvera391 puede aprobar PRs en main.');
-              }
             }
