@@ -59,16 +59,20 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const approvers = await github.pulls.listReviews({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: context.payload.pull_request.number,
-            });
+            if (!context.payload.pull_request) {
+              core.setFailed('❌ Este trabajo solo debe ejecutarse en eventos de pull_request.');
+            } else {
+              const approvers = await github.pulls.listReviews({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.payload.pull_request.number,
+              });
 
-            const validApprover = approvers.data.some(
-              review => review.user.login === 'ezequielvera391' && review.state === 'APPROVED'
-            );
+              const validApprover = approvers.data.some(
+                review => review.user.login === 'ezequielvera391' && review.state === 'APPROVED'
+              );
 
-            if (!validApprover) {
-              core.setFailed('❌ Solo @ezequielvera391 puede aprobar PRs en main.');
+              if (!validApprover) {
+                core.setFailed('❌ Solo @ezequielvera391 puede aprobar PRs en main.');
+              }
             }
