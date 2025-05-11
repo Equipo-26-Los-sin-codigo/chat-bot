@@ -1,12 +1,12 @@
-# 🚀 Chat-Bot - Los Sin Código
+# 🤖 Chat-Bot - Los Sin Código
 
-Bienvenidos al proyecto **Chat-Bot** del equipo **Los Sin Código**. Este repositorio contiene un chatbot educativo creado para la materia **Introducción a la Algoritmia**.
+Bienvenidos al proyecto **Chat-Bot** del equipo **Los Sin Código**. Este repositorio contiene un chatbot educativo creado para la **Copa Algoritmica** de la UADE.
 
 ---
 
-## 🚀 Clonar el Repositorio
+## ⚙️ Clonar el Repositorio
 
-### ✅ 1. Clonar el repositorio en tu máquina local
+### 1. Clonar el repositorio en tu máquina local
 
 ```bash
 # Usando HTTPS
@@ -16,13 +16,13 @@ git clone https://github.com/Equipo-26-Los-sin-codigo/chat-bot.git
 git clone git@github.com:Equipo-26-Los-sin-codigo/chat-bot.git
 ```
 
-### ✅ 2. Acceder al proyecto
+### 2. Acceder al proyecto
 
 ```bash
 cd chat-bot
 ```
 
-### ✅ 3. Verificar la configuración
+### 3. Verificar la configuración
 
 ```bash
 git remote -v
@@ -30,45 +30,52 @@ git remote -v
 
 ---
 
-## 🚀 Subir una Nueva Modificación (Crear un Pull Request)
+## 📁 Configuración del CSV
 
-### ✅ 1. Crear una nueva rama
+El archivo CSV es la base de datos del chatbot. Debe estar estructurado de la siguiente manera:
 
-```bash
-git checkout -b nombre-de-tu-rama
+### Estructura del CSV:
+
+* **ID:** Identificador de la sección principal.
+* **Sección:** Nombre de la sección a la que pertenecen las preguntas.
+* **SubID:** Identificador único de cada pregunta dentro de la sección.
+* **Pregunta:** El texto de la pregunta.
+* **Respuesta:** La respuesta correspondiente a la pregunta.
+
+### Ejemplo del CSV:
+
+```csv
+ID,Sección,SubID,Pregunta,Respuesta
+1,Información General,1.0,1. Información General,
+1,Información General,1.1,¿Cuál es la duración total de la carrera?,La carrera tiene una duración total de 3 años (5 cuatrimestres).
 ```
-
-### ✅ 2. Realizar cambios y guardar
-
-* Realiza las modificaciones necesarias.
-* Guarda los archivos.
-
-### ✅ 3. Añadir y commitear los cambios
-
-```bash
-git add .
-git commit -m "Descripción clara de tus cambios"
-```
-
-### ✅ 4. Subir los cambios a GitHub
-
-```bash
-git push origin nombre-de-tu-rama
-```
-
-### ✅ 5. Crear el Pull Request (PR)
-
-* Ve a GitHub.
-* Haz clic en **"Pull Requests" > "New Pull Request"**.
-* Selecciona tu rama y sigue los pasos para crear el PR.
 
 ---
 
-## 📌 Buenas Prácticas
+## 💬 Flujo del Chatbot
 
-* Asegúrate de que tu PR tenga una descripción clara.
-* No subas archivos innecesarios (node\_modules, .env).
-* Espera la revisión y aprobación antes de fusionar.
+### 1. Inicio del Chatbot
+
+* El usuario ve un mensaje de bienvenida y el menú principal con las secciones disponibles.
+
+### 2. Navegación por el Menú Principal
+
+* El usuario selecciona el ID de la sección que desea consultar.
+
+### 3. Ver Respuestas
+
+* El usuario selecciona el SubID de la pregunta que desea ver.
+
+### 4. Salida del Chatbot
+
+* El usuario puede escribir `salir` en cualquier momento para terminar la conversación.
+
+---
+
+## 🆗 Buenas Prácticas para Modificar el CSV
+
+* Mantén la estructura del archivo CSV.
+* Las secciones deben tener un SubID terminado en `.0` para ser menús principales.
 
 ---
 
