@@ -35,19 +35,15 @@ git remote -v
 El archivo CSV es la base de datos del chatbot. Debe estar estructurado de la siguiente manera:
 
 ### Estructura del CSV:
-
-* **ID:** Identificador de la sección principal.
-* **Sección:** Nombre de la sección a la que pertenecen las preguntas.
-* **SubID:** Identificador único de cada pregunta dentro de la sección.
 * **Pregunta:** El texto de la pregunta.
 * **Respuesta:** La respuesta correspondiente a la pregunta.
 
 ### Ejemplo del CSV:
 
 ```csv
-ID,Sección,SubID,Pregunta,Respuesta
-1,Información General,1.0,1. Información General,
-1,Información General,1.1,¿Cuál es la duración total de la carrera?,La carrera tiene una duración total de 3 años (5 cuatrimestres).
+Pregunta,Respuesta
+¿Cuál es la duración total de la carrera?,La carrera tiene una duración total de 3 años (5 cuatrimestres).
+¿Qué título se obtiene al finalizar la tecnicatura?,Se obtiene el título de Técnico Universitario en Desarrollo de Software.
 ```
 
 ---
