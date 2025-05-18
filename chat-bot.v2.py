@@ -232,7 +232,61 @@ def _read_json(path):
     return resultado
 
 # Módulo de escritura de archivos
+def persist_data(file_path, file_type, qa_dict):
+    """
+    Persiste el diccionario recibido en el archivo indicado por file_path de acuerdo
+    al formato file_type ('csv', 'txt' o 'json').
 
+    - Para CSV/TXT: reescribe cabecera y todas las filas.
+    - Para JSON: guarda una lista de objetos {pregunta, respuesta}.
+    """
+    tmp_path = file_path + '.tmp' # Usa un archivo temporal y luego lo reemplaza por el original, esta estrategia es por si se interrumpe o sucede algo antes de que se termine el proceso de escritura
+
+    if file_type in ('csv', 'txt'):
+        # Reescribe todo el CSV/TXT
+        with open(tmp_path, 'w', newline='', encoding='utf-8') as f:
+            writer = csv.writer(f)
+            writer.writerow(['Pregunta', 'Respuesta'])
+            for pregunta, respuesta in qa_dict.items():
+                writer.writerow([pregunta, respuesta])
+
+    elif file_type == 'json':
+        # Convierte dict a lista de objetos
+        data_list = [
+            {'pregunta': p, 'respuesta': r}
+            for p, r in qa_dict.items()
+        ]
+        with open(tmp_path, 'w', encoding='utf-8') as f:
+            json.dump(data_list, f, ensure_ascii=False, indent=2)
+
+    else:
+        raise ValueError(f"Tipo de archivo desconocido: {file_type}")
+
+    # Reemplaza el archivo original de forma atómica
+    os.replace(tmp_path, file_path)
+
+
+def handle_write_flow(file_type, file_path, qa_dict):
+    """
+    Flujo de escritura: permite al usuario añadir pares pregunta/respuesta,
+    actualiza qa_dict y persiste luego al archivo.
+    """
+    print("\n✍️ Modo escritura (añadir preguntas). Escribe “salir” para terminar.")
+    while True:
+        nueva_p = input("Ingresa la nueva pregunta: ").strip()
+        if nueva_p.lower() in ("salir", "exit", "fin"):
+            print("🔚 Saliendo del modo escritura.")
+            break
+
+        nueva_r = input("Ingresa la respuesta para esa pregunta: ").strip()
+        qa_dict[nueva_p] = nueva_r
+        print("✅ Pregunta añadida en memoria.")
+
+        # Persiste todo el dict al archivo
+        persist_data(file_path, file_type, qa_dict)
+        print(f"✅ Archivo actualizado: {file_path}\n")
+
+# Función principal
 def main():
     # 1. Mensaje de bienvenida
     print(welcome_message())
@@ -245,8 +299,7 @@ def main():
     # 5. Consultar si quiero Leer o escribir el archivo
     operation_type = ask_operation_type()
     if operation_type == 'escribir':
-        print("escribir")
-        # Acá va la logica de escribir
+        handle_write_flow(file_type, file_path, data_source)
     else:
         print("leer")
         handle_read_flow(data_source)
