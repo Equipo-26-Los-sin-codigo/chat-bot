@@ -9,7 +9,7 @@ Pregunta,Respuesta
 ¿Existen materias optativas? ¿Cuántas y de qué tipo?,"Sí, existen 3 materias optativas relacionadas con tecnologías o lenguajes específicos."
 ¿Qué tipo de trabajo final se requiere para egresar?,Se requiere un Trabajo Integrador Final basado en un proyecto práctico.
 "¿Qué áreas de conocimiento abarca la carrera (programación, bases de datos, redes, etc.)?","Incluye programación, bases de datos, redes, sistemas operativos, testing, desarrollo web, y gestión de proyectos."
-¿En qué roles puede desempeñarse un egresado de esta tecnicatura?,"El egresado puede trabajar como desarrollador, tester, analista, administrador de bases de datos o especialista en redes."
+¿En qué roles puede desempeñarse un egresado de esta tecnicatura? ¿Cual es la salida laboral?,"El egresado puede trabajar como desarrollador, tester, analista, administrador de bases de datos o especialista en redes."
 ¿Qué tipo de empresas suelen contratar a estos profesionales?,"Empresas tecnológicas nacionales e internacionales, y organizaciones con necesidades informáticas internas."
 ¿La carrera incluye certificaciones reconocidas en el mercado?,No se especifica que incluya certificaciones reconocidas oficialmente.
 ¿Qué habilidades prácticas se desarrollan durante la cursada?,"Se desarrollan habilidades en programación, testing, bases de datos, redes, y metodologías ágiles."
