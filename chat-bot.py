@@ -42,7 +42,7 @@ def welcome_message():
     """
     Devuelve el mensaje de bienvenida al usuario.
     """
-    return (
+    print(
         "¡Hola! Bienvenido al asistente de chat de los Sin Código. 🤖 \n"
         "Aquí podrás cargar tus datos desde un archivo y hacer consultas en lenguaje natural.\n"
         f"Este char responderá preguntas relacionadas a {CHATBOT_TOPIC}.\n"
@@ -259,6 +259,7 @@ def persist_data(file_path, file_type, qa_dict):
 
     if file_type in ('csv', 'txt'):
         # Reescribe todo el CSV/TXT
+        # TODO: mejorar para no reescribir todo el archivo
         with open(tmp_path, 'w', newline='', encoding='utf-8') as f:
             writer = csv.writer(f)
             writer.writerow(['Pregunta', 'Respuesta'])
@@ -286,9 +287,9 @@ def handle_write_flow(file_type, file_path, qa_dict):
     Flujo de escritura: permite al usuario añadir pares pregunta/respuesta,
     actualiza qa_dict y persiste luego al archivo.
     """
-    print("\n✍️ Modo escritura (añadir preguntas). Escribe “salir” para terminar.")
+    print("\n✍️  Modo escritura (añadir preguntas). Escribe “salir” para terminar.")
     while True:
-        nueva_p = input("Ingresa la nueva pregunta o escribe 'salir' para terminar").strip()
+        nueva_p = input("Ingresa la nueva pregunta o escribe 'salir' para terminar ").strip()
         if nueva_p.lower() in ("salir", "exit", "fin"):
             print("🔚 Saliendo del modo escritura.")
             break
@@ -304,7 +305,7 @@ def handle_write_flow(file_type, file_path, qa_dict):
 # Función principal
 def main():
     # 1. Mensaje de bienvenida
-    print(welcome_message())
+    welcome_message()
     # 2. Preguntar tipo de archivo para la fuente de datos
     file_type   = ask_file_type()
     # 3. Obtener ruta del archivo de datos
