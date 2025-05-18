@@ -2,6 +2,7 @@ import csv
 import json
 import os
 import re
+import unicodedata
 # CONSTANTES GLOBALES
 ## Constante de tipos de archivo válidos para la fuente de datos
 
@@ -91,44 +92,55 @@ def handle_read_flow(qa_dict):
 # Pipeline de limpieza y tokenización de strings
 def normalize_and_tokenize(text):
     """
-    Normaliza el texto: pasa a minúsculas, elimina puntuación,
-    y tokeniza en palabras, filtrando por nuestra constante de stopwords.
+    Normaliza el texto: convierte a minúsculas, elimina acentos y diacríticos,
+    quita puntuación, tokeniza en palabras y filtra stopwords.
 
-    Retorna una lista de tokens.
+    También aplica una forma básica de stemming eliminando 's' final
+    en palabras largas para capturar plurales.
+    Retorna lista de tokens normalizados.
     """
-    # Pasa a minúsculas
+    # Minúsculas
     text = text.lower()
-    # Elimina signos de puntuación (cualquier caracter no alfanumérico o espacio)
-    text = re.sub(r"[^\w\s]", "", text)
-    # Separa en tokens
-    tokens = text.split()
-    # Filtra stopwords
-    return [tok for tok in tokens if tok not in STOPWORDS]
+    # Eliminar acentos / diacríticos
+    text = unicodedata.normalize('NFD', text) # divide las letras ascentuadas en su letra y su caracter diacritico
+    text = ''.join(c for c in text if unicodedata.category(c) != 'Mn') # elimina las tildes y caracteres diacriticos
+    # Quitar puntuación
+    text = re.sub(r"[^\w\s]", "", text) # remueve caracteres especiales
+    # Separar en tokens
+    tokens = text.split() # divide el string en un array de strings usando los espacios como identificador de separador entre token y token
+    # Aplicar stemming básico: remover 's' final en tokens largos
+    stemmed = []
+    for tok in tokens:
+        if tok.endswith('s') and len(tok) > 3:
+            stemmed.append(tok[:-1])
+        else:
+            stemmed.append(tok)
+    # Filtrar stopwords
+    return [tok for tok in stemmed if tok not in STOPWORDS]
 
 
 def find_best_match(tokens, qa_dict):
     """
-    Dado un listado de tokens de la consulta y un dict QA,
-    calcula la pregunta con mayor número de tokens en común
-    y devuelve la respuesta correspondiente.
-
-    Si no hay coincidencias, devuelve None.
+    Dado tokens de la consulta y qa_dict, devuelve la respuesta cuya pregunta
+    comparta más tokens únicos.
+    Retorna None si no hay coincidencias.
     """
     best_question = None
     best_score = 0
 
-    for question, answer in qa_dict.items():
+    # recorro cada
+    for question, _answer in qa_dict.items(): # uso el _ al principio de answer para indicar que no se va a utilziar
         q_tokens = normalize_and_tokenize(question)
-        # Calcula intersección de tokens únicos
-        score = len(set(tokens) & set(q_tokens))
-        if score > best_score:
+        # convierto ambos listados de tokens en conjuntos, uso el operador '&' para que calcule la INTERSECCION entre los conjuntos
+        score = len(set(tokens) & set(q_tokens)) # calculo la cantidad de intersecciones (coincidencias) entre los tokens de las preguntas de la fuente de datos y los tokens de la pregunta del usuario
+        if score > best_score: 
             best_score = score
             best_question = question
 
     # Si no encontramos ninguna coincidencia significativa, retornamos None
     if best_score == 0:
         return None
-    return qa_dict[best_question]
+    return qa_dict[best_question] # Devuelve la respuesta con más coincidencias
 
 # Módulo de lectura de archivos
 
@@ -301,7 +313,6 @@ def main():
     if operation_type == 'escribir':
         handle_write_flow(file_type, file_path, data_source)
     else:
-        print("leer")
         handle_read_flow(data_source)
 
 # Inicio del programa principal
