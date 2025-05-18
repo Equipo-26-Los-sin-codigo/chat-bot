@@ -8,6 +8,7 @@ import unicodedata
 
 CHATBOT_TOPIC = "la Tecnicatura de Desarrollo de Software de la UADE" # Define el nombre de la tematica que va a responder el chat, debe coincidir con la fuente de datos suministrada
 FILE_TYPES = ["csv", "json", "txt"]
+EXIT_KEYWORDS = {"salir", "exit", "fin"}
 OPERATIONS_TYPES = ["leer", "escribir"]
 OPERATION_KEYWORDS = {
     "leer":     ["leer", "lectura", "hablar", "preguntar"],
@@ -49,23 +50,25 @@ def welcome_message():
 
 def ask_operation_type():
     """
-    Pregunta al usuario qué tipo de operación desea realizar
-    hasta detectar una palabra clave en OPERATION_KEYWORDS.
-    Devuelve el tipo canónico ('leer' o 'escribir').
+    Devuelve 'leer', 'escribir' o 'exit' si el usuario quiere terminar.
     """
-    prompt = f"¿Deseas hablar con nuestro chat o añadir preguntas? ({', '.join(OPERATIONS_TYPES)}): "
+    prompt = f"¿Deseas hablar con nuestro chat, añadir preguntas, o salir? ({', '.join(OPERATIONS_TYPES)} / salir): "
     while True:
-        respuesta = input(prompt).strip().lower() # separa cada una de las palabras ingresadas por el usuario y las convierte a minuscula
-        tokens = re.findall(r'\w+', respuesta) # Extrae solo las palabras alfanuméricas
-        for op, keywords in OPERATION_KEYWORDS.items(): # Recorre cada keyword de cada operación
+        respuesta = input(prompt).strip().lower()
+        tokens = re.findall(r'\w+', respuesta)
+        # 1) ¿Quiere salir del programa?
+        if any(tok in EXIT_KEYWORDS for tok in tokens):
+            return "exit"
+        # 2) buscar leer / escribir
+        for op, keywords in OPERATION_KEYWORDS.items():
             if any(token in keywords for token in tokens):
                 print(f"Entendido: operación «{op}».")
                 return op
         print(
             f"No reconozco «{respuesta}». "
-            f"Por favor, menciona {' o '.join(OPERATIONS_TYPES)} "
-            f"(o alguno de sus sinónimos).\n"
+            f"Por favor, menciona leer, escribir o salir.\n"
         )
+
 
 def handle_read_flow(qa_dict):
     """
@@ -285,7 +288,7 @@ def handle_write_flow(file_type, file_path, qa_dict):
     """
     print("\n✍️ Modo escritura (añadir preguntas). Escribe “salir” para terminar.")
     while True:
-        nueva_p = input("Ingresa la nueva pregunta: ").strip()
+        nueva_p = input("Ingresa la nueva pregunta o escribe 'salir' para terminar").strip()
         if nueva_p.lower() in ("salir", "exit", "fin"):
             print("🔚 Saliendo del modo escritura.")
             break
@@ -303,17 +306,27 @@ def main():
     # 1. Mensaje de bienvenida
     print(welcome_message())
     # 2. Preguntar tipo de archivo para la fuente de datos
-    file_type = ask_file_type()
+    file_type   = ask_file_type()
     # 3. Obtener ruta del archivo de datos
-    file_path = get_data_file_path(file_type)
+    file_path   = get_data_file_path(file_type)
     # 4. Leer el archivo y mostrar datos
-    data_source = read_file_as_dict(file_path,file_type)
-    # 5. Consultar si quiero Leer o escribir el archivo
-    operation_type = ask_operation_type()
-    if operation_type == 'escribir':
-        handle_write_flow(file_type, file_path, data_source)
-    else:
-        handle_read_flow(data_source)
+    qa_dict     = read_file_as_dict(file_path, file_type)
+
+    # Loop principal del programa
+    while True:
+        # 5. Consultar si quiero Leer o escribir el archivo
+        operation = ask_operation_type()
+        if operation == "exit":
+            print("👋 Gracias por usar el chat de los Sin Código ¡Hasta luego!")
+            break
+
+        if operation == "leer":
+            handle_read_flow(qa_dict)
+        else:  # escribir
+            handle_write_flow(file_type, file_path, qa_dict)
+
+        # al terminar el flujo, volvemos a preguntar operación
+        print("\n— Volviendo al menú de operaciones —\n")
 
 # Inicio del programa principal
 main()
