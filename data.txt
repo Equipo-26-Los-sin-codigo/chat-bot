@@ -1,37 +1,32 @@
-Pregunta,Respuesta,,,
-¿Cuál es la duración total de la carrera?,La carrera tiene una duración total de 3 años (5 cuatrimestres).,,,
-¿Qué título se obtiene al finalizar la tecnicatura?,Se obtiene el título de Técnico Universitario en Desarrollo de Software.,,,
-¿En qué sedes de UADE se puede cursar esta carrera?,Puede cursarse en el Campus Buenos Aires (CABA) y Campus Costa Argentina (Pinamar).,,,
-¿La modalidad de cursada es presencial o hay opciones a distancia?,"La modalidad es presencial, con opción flexible en el Campus Costa Argentina.",,,
-¿La tecnicatura permite continuar estudios hacia una carrera de grado?,"Sí, permite continuar hacia carreras de grado como Licenciatura en Sistemas o Ingeniería en Informática.",,,
-¿Cuántas materias incluye el plan de estudios?,El plan incluye 22 asignaturas en total.,,,
-¿Qué asignaturas se cursan en el primer año?,"Primer año: Introducción a la Algoritmia, Sistemas de Información I y II, Arquitectura de Computadores, Diseño y Desarrollo Web, Algoritmos y Estructuras de Datos I, Sistemas Operativos, Testing de Aplicaciones.",,,
-¿Existen materias optativas? ¿Cuántas y de qué tipo?,"Sí, existen 3 materias optativas relacionadas con tecnologías o lenguajes específicos.",,,
-¿Qué tipo de trabajo final se requiere para egresar?,Se requiere un Trabajo Integrador Final basado en un proyecto práctico.,,,
-"¿Qué áreas de conocimiento abarca la carrera (programación, bases de datos, redes, etc.)?","Incluye programación, bases de datos, redes, sistemas operativos, testing, desarrollo web, y gestión de proyectos.",,,
-¿En qué roles puede desempeñarse un egresado de esta tecnicatura?,"El egresado puede trabajar como desarrollador, tester, analista, administrador de bases de datos o especialista en redes.",,,
-¿Qué tipo de empresas suelen contratar a estos profesionales?,"Empresas tecnológicas nacionales e internacionales, y organizaciones con necesidades informáticas internas.",,,
-¿La carrera incluye certificaciones reconocidas en el mercado?,No se especifica que incluya certificaciones reconocidas oficialmente.,,,
-¿Qué habilidades prácticas se desarrollan durante la cursada?,"Se desarrollan habilidades en programación, testing, bases de datos, redes, y metodologías ágiles.",,,
-¿Se ofrecen oportunidades de pasantías o prácticas profesionales?,"Sí, UADE ofrece un sistema de pasantías profesionales.",,,
-¿Cuál es el costo mensual por materia?,El costo mensual por materia es de aproximadamente 72.918 ARS.,,,
-¿Existen paquetes de materias con descuentos?,"Sí, hay paquetes de 4 materias desde 277.083 ARS mensuales.",,,
-¿UADE ofrece becas o ayudas económicas para esta carrera?,"Sí, se ofrece una beca del 10% sobre aranceles por ciclo lectivo.",,,
-"¿Cómo se abonan los aranceles (mensual, cuatrimestral, etc.)?",Los aranceles se abonan mensualmente.,,,
-¿Hay costos adicionales por materiales o laboratorios?,No se especifican costos adicionales por materiales o laboratorios.,,,
-¿Qué documentación se necesita para inscribirse?,"Se necesita DNI, foto 4x4 digital, constancia de estudios secundarios, y pago del derecho de admisión.",,,
-¿Es necesario rendir algún examen de ingreso?,"No, no es necesario rendir un examen de ingreso.",,,
-¿Se puede presentar equivalencias de materias aprobadas en otras instituciones?,"Sí, pueden presentarse equivalencias de otras instituciones.",,,
-¿Cuál es el proceso de admisión paso a paso?,"El proceso incluye: inscripción online, envío de documentación, pago del derecho de admisión, y confirmación.",,,
-¿Hay fechas límite para la inscripción?,"No se indican fechas límite específicas, se recomienda consultar directamente.",,,
-¿Quién es el director o responsable de la carrera?,Esclante Leiva Ezequiel Ramiro.,,,
-¿Qué laboratorios o espacios prácticos ofrece UADE para esta tecnicatura?,"UADE ofrece laboratorios prácticos, aunque no se especifican detalles.",,,
-¿Se utilizan plataformas o herramientas específicas durante la cursada?,"Sí, se utilizan herramientas y plataformas digitales, especialmente para programación y testing.",,,
-¿Qué opinan los estudiantes actuales o egresados sobre la carrera?,"Las opiniones son generalmente positivas, destacando la preparación práctica y el enfoque laboral.",,,
-¿UADE tiene convenios con empresas del sector tecnológico?,"Sí, UADE tiene convenios con empresas del sector tecnológico para prácticas y empleo.7",,,
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-,,Nuevas Preguntas,¿Cuántas materias tiene la carrera?,La carrera tiene 24 materias en total.
+Pregunta,Respuesta
+¿Cuál es la duración total de la carrera?,La carrera tiene una duración total de 3 años (5 cuatrimestres).
+¿Qué título se obtiene al finalizar la tecnicatura?,Se obtiene el título de Técnico Universitario en Desarrollo de Software.
+¿En qué sedes de UADE se puede cursar esta carrera?,Puede cursarse en el Campus Buenos Aires (CABA) y Campus Costa Argentina (Pinamar).
+¿La modalidad de cursada es presencial o hay opciones a distancia?,"La modalidad es presencial, con opción flexible en el Campus Costa Argentina."
+¿La tecnicatura permite continuar estudios hacia una carrera de grado?,"Sí, permite continuar hacia carreras de grado como Licenciatura en Sistemas o Ingeniería en Informática."
+¿Cuántas materias incluye el plan de estudios?,El plan incluye 22 asignaturas en total.
+¿Qué asignaturas se cursan en el primer año?,"Primer año: Introducción a la Algoritmia, Sistemas de Información I y II, Arquitectura de Computadores, Diseño y Desarrollo Web, Algoritmos y Estructuras de Datos I, Sistemas Operativos, Testing de Aplicaciones."
+¿Existen materias optativas? ¿Cuántas y de qué tipo?,"Sí, existen 3 materias optativas relacionadas con tecnologías o lenguajes específicos."
+¿Qué tipo de trabajo final se requiere para egresar?,Se requiere un Trabajo Integrador Final basado en un proyecto práctico.
+"¿Qué áreas de conocimiento abarca la carrera (programación, bases de datos, redes, etc.)?","Incluye programación, bases de datos, redes, sistemas operativos, testing, desarrollo web, y gestión de proyectos."
+¿En qué roles puede desempeñarse un egresado de esta tecnicatura?,"El egresado puede trabajar como desarrollador, tester, analista, administrador de bases de datos o especialista en redes."
+¿Qué tipo de empresas suelen contratar a estos profesionales?,"Empresas tecnológicas nacionales e internacionales, y organizaciones con necesidades informáticas internas."
+¿La carrera incluye certificaciones reconocidas en el mercado?,No se especifica que incluya certificaciones reconocidas oficialmente.
+¿Qué habilidades prácticas se desarrollan durante la cursada?,"Se desarrollan habilidades en programación, testing, bases de datos, redes, y metodologías ágiles."
+¿Se ofrecen oportunidades de pasantías o prácticas profesionales?,"Sí, UADE ofrece un sistema de pasantías profesionales."
+¿Cuál es el costo mensual por materia?,El costo mensual por materia es de aproximadamente 72.918 ARS.
+¿Existen paquetes de materias con descuentos?,"Sí, hay paquetes de 4 materias desde 277.083 ARS mensuales."
+¿UADE ofrece becas o ayudas económicas para esta carrera?,"Sí, se ofrece una beca del 10% sobre aranceles por ciclo lectivo."
+"¿Cómo se abonan los aranceles (mensual, cuatrimestral, etc.)?",Los aranceles se abonan mensualmente.
+¿Hay costos adicionales por materiales o laboratorios?,No se especifican costos adicionales por materiales o laboratorios.
+¿Qué documentación se necesita para inscribirse?,"Se necesita DNI, foto 4x4 digital, constancia de estudios secundarios, y pago del derecho de admisión."
+¿Es necesario rendir algún examen de ingreso?,"No, no es necesario rendir un examen de ingreso."
+¿Se puede presentar equivalencias de materias aprobadas en otras instituciones?,"Sí, pueden presentarse equivalencias de otras instituciones."
+¿Cuál es el proceso de admisión paso a paso?,"El proceso incluye: inscripción online, envío de documentación, pago del derecho de admisión, y confirmación."
+¿Hay fechas límite para la inscripción?,"No se indican fechas límite específicas, se recomienda consultar directamente."
+¿Quién es el director o responsable de la carrera?,Esclante Leiva Ezequiel Ramiro.
+¿Qué laboratorios o espacios prácticos ofrece UADE para esta tecnicatura?,"UADE ofrece laboratorios prácticos, aunque no se especifican detalles."
+¿Se utilizan plataformas o herramientas específicas durante la cursada?,"Sí, se utilizan herramientas y plataformas digitales, especialmente para programación y testing."
+¿Qué opinan los estudiantes actuales o egresados sobre la carrera?,"Las opiniones son generalmente positivas, destacando la preparación práctica y el enfoque laboral."
+¿UADE tiene convenios con empresas del sector tecnológico?,"Sí, UADE tiene convenios con empresas del sector tecnológico para prácticas y empleo.7"
+¿Cuántas materias tiene la carrera?,La carrera tiene 24 materias en total.
