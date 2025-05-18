@@ -1,85 +1,96 @@
 # 🤖 Chat-Bot - Los Sin Código
 
-Bienvenidos al proyecto **Chat-Bot** del equipo **Los Sin Código**. Este repositorio contiene un chatbot educativo creado para la **Copa Algoritmica** de la UADE.
+Bienvenido al proyecto Chat-Bot del equipo Los Sin Código. Este repositorio contiene un chatbot de línea de comandos para responder preguntas o añadir nuevos pares de pregunta-respuesta sobre la Tecnicatura de Desarrollo de Software de la UADE. El tema que muestra el chatbot se define en la constante CHATBOT_TOPIC dentro de chat_bot.py; modifícala para adaptar el título y la temática a tu propia fuente de datos.
 
 ---
 
-## ⚙️ Clonar el Repositorio
+## ⚙️ Preparación
 
-### 1. Clonar el repositorio en tu máquina local
+1. **Clona el repositorio** en tu máquina local:
+
+   ```bash
+   git clone https://github.com/Equipo-26-Los-sin-codigo/chat-bot.git
+   cd chat-bot
+   ```
+
+2. **Verifica** que tengas Python 3 instalado:
+
+   ```bash
+   python --version
+   ```
+
+3. **Archivos de datos**: crea uno de estos archivos en el mismo directorio del script:
+
+   * `data.csv` o `data.txt` con formato:
+
+     ```csv
+     Pregunta,Respuesta
+     ¿Cuál es tu pregunta?,Esta es la respuesta.
+     ```
+   * `data.json` como lista de objetos:
+
+     ```json
+     [
+       {"pregunta": "¿Cuál es tu pregunta?", "respuesta": "Esta es la respuesta."}
+     ]
+     ```
+
+4. **Reemplaza** o añade tus datos reales siguiendo los ejemplos anteriores.
+
+---
+
+## 🚀 Uso
+
+Ejecuta el chatbot con:
 
 ```bash
-# Usando HTTPS
-git clone https://github.com/Equipo-26-Los-sin-codigo/chat-bot.git
-
-# Usando SSH (recomendado si tienes configurada tu llave SSH)
-git clone git@github.com:Equipo-26-Los-sin-codigo/chat-bot.git
+python chat_bot.py
 ```
 
-### 2. Acceder al proyecto
+**Flujo principal**:
 
-```bash
-cd chat-bot
-```
+1. Saludo y descripción del tema.
+2. Selección del tipo de archivo (`csv`, `json` o `txt`).
+3. Elección de operación:
 
-### 3. Verificar la configuración
+   * **leer**: preguntar y recibir respuestas a partir de tus datos.
+   * **escribir**: añadir nuevas preguntas y respuestas.
+   * **salir**: finalizar el programa.
+4. El programa vuelve al menú de operaciones tras cada lectura o escritura, hasta que se elija **salir**.
 
-```bash
-git remote -v
-```
+### Modo lectura (`leer`)
+
+* Ingresa tu consulta en lenguaje natural.
+* El bot normaliza y tokeniza, luego busca la pregunta con más palabras en común.
+* Si hay coincidencias, muestra la respuesta; de lo contrario, invita a reformular.
+* Escribe `salir` para volver al menú principal.
+
+### Modo escritura (`escribir`)
+
+* Ingresa la **nueva pregunta** o `salir` para volver.
+* Ingresa la **respuesta** correspondiente.
+* Los pares se guardan en memoria y luego se persisten al archivo.
+* Se usa un archivo temporal para garantizar que la escritura sea atómica.
 
 ---
 
-## 📁 Configuración del CSV
+## 🗂️ Estructura de archivos
 
-El archivo CSV es la base de datos del chatbot. Debe estar estructurado de la siguiente manera:
-
-### Estructura del CSV:
-
-* **ID:** Identificador de la sección principal.
-* **Sección:** Nombre de la sección a la que pertenecen las preguntas.
-* **SubID:** Identificador único de cada pregunta dentro de la sección.
-* **Pregunta:** El texto de la pregunta.
-* **Respuesta:** La respuesta correspondiente a la pregunta.
-
-### Ejemplo del CSV:
-
-```csv
-ID,Sección,SubID,Pregunta,Respuesta
-1,Información General,1.0,1. Información General,
-1,Información General,1.1,¿Cuál es la duración total de la carrera?,La carrera tiene una duración total de 3 años (5 cuatrimestres).
-```
+* `chat_bot.py`  – Lógica principal del chatbot.
+* `data.csv`  – Base de datos en formato CSV/TXT.
+* `data.json`  – Base de datos en formato JSON.
 
 ---
 
-## 💬 Flujo del Chatbot
+## 📝 Buenas prácticas
 
-### 1. Inicio del Chatbot
-
-* El usuario ve un mensaje de bienvenida y el menú principal con las secciones disponibles.
-
-### 2. Navegación por el Menú Principal
-
-* El usuario selecciona el ID de la sección que desea consultar.
-
-### 3. Ver Respuestas
-
-* El usuario selecciona el SubID de la pregunta que desea ver.
-
-### 4. Salida del Chatbot
-
-* El usuario puede escribir `salir` en cualquier momento para terminar la conversación.
+* Mantén siempre el encabezado (`Pregunta,Respuesta`) en CSV/TXT.
+* En JSON, conserva la lista de objetos `{"pregunta": ..., "respuesta": ...}`.
+* No modifiques manualmente el archivo temporal (`.tmp`).
 
 ---
 
-## 🆗 Buenas Prácticas para Modificar el CSV
+## 👤 Contacto
 
-* Mantén la estructura del archivo CSV.
-* Las secciones deben tener un SubID terminado en `.0` para ser menús principales.
-
----
-
-## 🚀 Contacto
-
-* Equipo Los Sin Código
-* Ezequiel Vera - [GitHub](https://github.com/ezequielvera391)
+* **Equipo Los Sin Código**
+* Ezequiel Vera  – [GitHub](https://github.com/ezequielvera391)
