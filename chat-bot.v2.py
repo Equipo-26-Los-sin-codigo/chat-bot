@@ -12,6 +12,29 @@ OPERATION_KEYWORDS = {
     "leer":     ["leer", "lectura", "hablar", "preguntar"],
     "escribir": ["escribir", "escritura", "añadir", "agregar"]
 }
+# Conjunto de stopwords en español para filtrar tokens irrelevantes
+STOPWORDS = {
+    "a", "al", "algo", "algunas", "algunos", "ante", "antes",
+    "como", "con", "contra", "cual", "cuando", "de", "del", "desde",
+    "donde", "durante", "e", "el", "ella", "ellas", "ellos", "en",
+    "entre", "era", "erais", "eran", "eras", "eres", "es", "esa",
+    "esas", "ese", "eso", "esos", "esta", "está", "estaba", "estado",
+    "estáis", "están", "estar", "este", "esto", "estos", "fue", "fueron",
+    "fui", "fuimos", "ha", "había", "habéis", "habían", "haber", "hace",
+    "hacia", "hago", "han", "has", "hasta", "hay", "he", "hemos", "hube",
+    "hubo", "la", "las", "le", "les", "lo", "los", "más", "me", "mi",
+    "mis", "mucho", "muy", "nada", "ni", "no", "nos", "nosotras",
+    "nosotros", "nuestra", "nuestro", "o", "os", "otra", "otro", "para",
+    "pero", "poco", "por", "porque", "que", "quien", "quienes", "se",
+    "sea", "sean", "según", "ser", "si", "sí", "sido", "siempre",
+    "siendo", "sin", "sobre", "sois", "solamente", "solo", "somos",
+    "son", "soy", "su", "sus", "también", "tanto", "te", "tendrá",
+    "tenemos", "tengo", "ti", "tiene", "tienen", "todo", "todos",
+    "tu", "tus", "un", "una", "uno", "unos", "usted", "ustedes",
+    "va", "vamos", "van", "varias", "varios", "vaya", "verdad",
+    "vosotras", "vosotros", "voy", "ya", "yo",
+    "qué", "cómo", "cuál", "dónde", "porqué", "por qué", "quién", "quiénes"  
+}
 # Modulo chatbot
 def welcome_message():
     """
@@ -42,6 +65,70 @@ def ask_operation_type():
             f"Por favor, menciona {' o '.join(OPERATIONS_TYPES)} "
             f"(o alguno de sus sinónimos).\n"
         )
+
+def handle_read_flow(qa_dict):
+    """
+    Flujo de “leer”: pregunta al usuario,
+    normaliza, extrae keywords y busca la mejor respuesta.
+    """
+    while True:
+        consulta = input("\n¿Qué quieres preguntar? (o escribe “salir”): ").strip()
+        if consulta.lower() in ("salir", "exit", "fin"):
+            print("🔚 Saliendo del chat de lectura.")
+            break
+
+        # 1. Normalizar y tokenizar (a implementar)
+        tokens = normalize_and_tokenize(consulta)
+
+        # 2. Buscar coincidencias (a implementar)
+        respuesta = find_best_match(tokens, qa_dict)
+
+        if respuesta:
+            print(f"🤖 {respuesta}")
+        else:
+            print("❓ No encontré una respuesta clara. ¿Quieres reformular tu pregunta?")
+
+# Pipeline de limpieza y tokenización de strings
+def normalize_and_tokenize(text):
+    """
+    Normaliza el texto: pasa a minúsculas, elimina puntuación,
+    y tokeniza en palabras, filtrando por nuestra constante de stopwords.
+
+    Retorna una lista de tokens.
+    """
+    # Pasa a minúsculas
+    text = text.lower()
+    # Elimina signos de puntuación (cualquier caracter no alfanumérico o espacio)
+    text = re.sub(r"[^\w\s]", "", text)
+    # Separa en tokens
+    tokens = text.split()
+    # Filtra stopwords
+    return [tok for tok in tokens if tok not in STOPWORDS]
+
+
+def find_best_match(tokens, qa_dict):
+    """
+    Dado un listado de tokens de la consulta y un dict QA,
+    calcula la pregunta con mayor número de tokens en común
+    y devuelve la respuesta correspondiente.
+
+    Si no hay coincidencias, devuelve None.
+    """
+    best_question = None
+    best_score = 0
+
+    for question, answer in qa_dict.items():
+        q_tokens = normalize_and_tokenize(question)
+        # Calcula intersección de tokens únicos
+        score = len(set(tokens) & set(q_tokens))
+        if score > best_score:
+            best_score = score
+            best_question = question
+
+    # Si no encontramos ninguna coincidencia significativa, retornamos None
+    if best_score == 0:
+        return None
+    return qa_dict[best_question]
 
 # Módulo de lectura de archivos
 
@@ -157,14 +244,12 @@ def main():
     data_source = read_file_as_dict(file_path,file_type)
     # 5. Consultar si quiero Leer o escribir el archivo
     operation_type = ask_operation_type()
-    print(operation_type)
     if operation_type == 'escribir':
         print("escribir")
         # Acá va la logica de escribir
     else:
         print("leer")
-        # Acá va la logica de leer
+        handle_read_flow(data_source)
 
-    print(data_source)
 # Inicio del programa principal
 main()
